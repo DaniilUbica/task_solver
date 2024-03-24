@@ -1,0 +1,9 @@
+<RCC>
+	<qresource prefix="/qml">
+		<file alias="main.qml">../qml/main.qml</file>
+		<file alias="QMConst.qml">../qml/QMConst.qml</file>
+		<file alias="TaskInput.qml">../qml/TaskInput.qml</file>
+		<file alias="QMButton.qml">../qml/QMButton.qml</file>
+		<file alias="QMTextField.qml">../qml/QMTextField.qml</file>
+	</qresource>
+</RCC>
