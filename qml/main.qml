@@ -47,6 +47,20 @@ ApplicationWindow {
                 inputKeys: [inputKeysHolder.num(), inputKeysHolder.time(), inputKeysHolder.failed(),
                         inputKeysHolder.interval_start(), inputKeysHolder.interval_end(), inputKeysHolder.interval_failed()]
             }
+
+            TaskInput {
+                id: task3Input
+                numInputs: 6
+                inputPlaceholders: ["Число деталей", "Время", "Отказало деталей", "Начало интервала", "Конец интервала", "Отказало деталей"]
+                inputKeys: [inputKeysHolder.num(), inputKeysHolder.time(), inputKeysHolder.failed(),
+                        inputKeysHolder.interval_start(), inputKeysHolder.interval_end(), inputKeysHolder.interval_failed()]
+            }
+
+            TaskMultilineInput {
+                numInputText: "Введите число деталей"
+                repeaterInputText: "Время работы детали"
+                inputKeys: [inputKeysHolder.num(), inputKeysHolder.detail_work_times()]
+            }
         }
 
         QMButton {

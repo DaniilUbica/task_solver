@@ -6,8 +6,8 @@ TextField {
     selectByMouse: true
 
     background: Rectangle {
-        implicitWidth: 200
-        implicitHeight: 40
+        implicitWidth: QMConst.textFieldNormalWidth
+        implicitHeight: QMConst.textFieldNormalHeight
         color: root.enabled ? QMConst.primaryColor : QMConst.primaryColorLight
         border.color: root.focus ? QMConst.secondaryColorBold : root.enabled ? QMConst.secondaryColor : QMConst.primaryColorLight
         border.width: root.focus ? 2 : 1

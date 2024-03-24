@@ -21,6 +21,6 @@ private:
     float failureIntensivity(float num, float t1, float t2, float interval_failure_num, float failed_num);
     float mtbf(float num, std::vector<float>& mtbf_details);
 
-    std::map<QString, float> m_data;
+    std::map<QString, QString> m_data;
     QString m_resultValues;
 };
