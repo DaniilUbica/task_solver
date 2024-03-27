@@ -82,7 +82,7 @@ Item {
         for (let i = 0; i < detailsNum; i++) {
             str += linesInput.itemAt(i).text + root.delimiter
         }
-        console.log(str)
+
         return str
     }
 }
