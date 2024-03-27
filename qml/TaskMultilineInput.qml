@@ -10,54 +10,62 @@ Item {
     property int detailsNum:           0
     property string numInputText:      ""
     property string repeaterInputText: ""
+    property string delimiter:         "-"
     property var inputKeys:            []
 
     readonly property int maxColumnsNum: 4
     readonly property int maxRowsNum:    2
 
-    ColumnLayout {
-        id: column
+    ScrollView {
+        clip: true
         anchors.fill: parent
-        spacing: QMConst.normalMargin
+        contentHeight: detailsNumInput.height + grid.height + linesInput.height + QMConst.normalMargin * 3
+        ScrollBar.vertical.policy: ScrollBar.AlwaysOn
 
-        QMTextField {
-            id: detailsNumInput
-            placeholderText: numInputText
+        Item {}
 
-            onTextChanged: {
-                root.detailsNum = detailsNumInput.text !== "" ? parseInt(detailsNumInput.text) : 0
-                root.columns = root.detailsNum > root.maxColumnsNum ? root.maxColumnsNum : root.detailsNum
+        ColumnLayout {
+            id: column
+            spacing: QMConst.normalMargin
 
-                var tmp = root.detailsNum
-                while (tmp > root.maxColumnsNum) {
-                    root.rows++
-                    tmp /= 2
-                }
+            QMTextField {
+                id: detailsNumInput
+                placeholderText: numInputText
 
-                setPlaceholdersNums()
-            }
-        }
+                onTextChanged: {
+                    root.detailsNum = detailsNumInput.text !== "" ? parseInt(detailsNumInput.text) : 0
+                    root.columns = root.detailsNum > root.maxColumnsNum ? root.maxColumnsNum : root.detailsNum
 
-        GridLayout {
-            id: grid
-            columns: root.columns
-            rowSpacing: QMConst.normalMargin
-            columnSpacing: QMConst.normalMargin
-            implicitHeight: QMConst.textFieldNormalHeight * root.rows + QMConst.normalMargin
+                    var tmp = root.detailsNum
+                    while (tmp > root.maxColumnsNum) {
+                        root.rows++
+                        tmp /= 2
+                    }
 
-            Repeater {
-                id: linesInput
-                model: root.detailsNum
-
-                QMTextField {
-                    placeholderText: repeaterInputText
-                    width: (grid.width - (grid.columns - 1) * grid.columnSpacing) / grid.columns - QMConst.normalMargin * 4
+                    setPlaceholdersNums()
                 }
             }
 
-            onVisibleChanged: {
-                if (!visible) {
-                    root.rows = 0
+            GridLayout {
+                id: grid
+                columns: root.columns
+                rowSpacing: QMConst.normalMargin
+                columnSpacing: QMConst.normalMargin
+
+                Repeater {
+                    id: linesInput
+                    model: root.detailsNum
+
+                    QMTextField {
+                        placeholderText: repeaterInputText
+                        width: (grid.width - (grid.columns - 1) * grid.columnSpacing) / grid.columns - QMConst.normalMargin * 4
+                    }
+                }
+
+                onVisibleChanged: {
+                    if (!visible) {
+                        root.rows = 0
+                    }
                 }
             }
         }
@@ -72,9 +80,9 @@ Item {
     function getInputData() {
         let str = inputKeys[0] + ":" + detailsNumInput.text + " " + inputKeys[1] + ":"
         for (let i = 0; i < detailsNum; i++) {
-            str += linesInput.itemAt(i).text + "-"
+            str += linesInput.itemAt(i).text + root.delimiter
         }
-
+        console.log(str)
         return str
     }
 }
